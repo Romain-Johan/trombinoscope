@@ -28,8 +28,10 @@
     }
 
     &.white {
+        width: auto;
         color: $darkish;
         background-color: #fff;
+        border: 1px solid $darkish;
         &:hover {
           background-color: $reddish;
           border-color: $reddish;

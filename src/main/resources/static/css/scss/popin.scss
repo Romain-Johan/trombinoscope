@@ -84,6 +84,11 @@
     border-radius: 5rem;
     align-items: center;
   }
+
+  &-footer {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .modal__header-close-button {
@@ -103,7 +108,7 @@
     top: 50%;
     height: 0.2rem;
     width: 100%;
-    background-color: #000;
+    background-color: $darkish;
     transition: all 0.25s;
   }
 
@@ -113,5 +118,5 @@
 
   &:after {
     transform: rotate(-45deg);
-  } 
+  }
 }

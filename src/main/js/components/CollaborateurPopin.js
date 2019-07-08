@@ -61,7 +61,7 @@ export default class CollaborateurPopin extends Component {
                                         </div>
                                     </div>
                                     <div className="authent__content-footer">
-                                        <button type="submit" className="button black">Valider</button>
+                                        <button type="submit" className="button white">Valider</button>
                                     </div>
                                 </form>
                             </div>
