@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - TrombinoscopeApplication",
+            "request": "launch",
+            "mainClass": "com.infotel.trombinoscope.TrombinoscopeApplication",
+            "projectName": "roulette"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - RouletteApplication",
+            "request": "launch",
+            "mainClass": "com.casino.roulette.RouletteApplication",
+            "projectName": "roulette"
+        }
+    ]
+}

@@ -1,0 +1,117 @@
+@import "settings";
+
+.popin-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  display: flex;
+}
+
+.popin {
+  position: relative;
+  border-radius: 2rem;
+  overflow: hidden;
+  height: auto;
+  width: auto;
+  z-index: 3;
+
+  &-content {
+    background-color: white;
+    overflow: hidden;
+    height: auto;
+    overflow-x: hidden;
+  }
+
+  &-background {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: black;
+    opacity: 0.75;
+    z-index: 2;
+  }
+}
+
+.authent__content {
+  position: initial;
+  height: 100%;
+  overflow: hidden;
+  margin: 1rem;
+
+  &-title { 
+    font-size: 2.4rem;
+    font-weight: bold;
+    line-height: 5rem;
+    text-align: center;
+    letter-spacing: 0.2rem;
+    position: relative;
+    margin: 2rem;
+  }
+
+  &-text {
+    position: relative;
+    text-align: center;
+  }
+
+  &-mobile {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 2rem;
+  }
+
+  &-error {
+    display: flex;
+    color: $reddish;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    height: 5rem;
+    margin-top: 1rem;
+    background-color: #e8d9b9;
+    justify-content: center;
+    border-radius: 5rem;
+    align-items: center;
+  }
+}
+
+.modal__header-close-button {
+  cursor: pointer;
+  display: flex;
+  position: relative;
+  float: right;
+  right: 0.5rem;
+  width: 1.5rem;
+  height: 2rem;
+
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 0.2rem;
+    width: 100%;
+    background-color: #000;
+    transition: all 0.25s;
+  }
+
+  &:before {
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+  } 
+}

@@ -1,0 +1,103 @@
+
+section.wrapper {
+	background-size: cover;
+	position: fixed;
+	display: flex;
+	flex-direction: column;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+div.content {
+	display: flex;
+	flex-direction: row;
+	height: 100%;
+	width: 100%;
+    flex-wrap: wrap;
+	justify-content: center;
+	overflow-y: scroll;
+}
+
+.collaborateur__card {
+	display: flex;
+    height: 20rem;
+    width: 15rem;
+    flex-direction: column;
+    margin: 0.7rem;
+    background-color: lightgray;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 5px grey;
+
+    &:hover {
+        img {
+          transition-duration: 500ms;
+          transform: scale(1.2);
+        }
+        .collaborateur__card-actions {
+            display: flex;
+        }
+      }
+
+    &-picture {
+        display: flex;
+        justify-content: center;
+        height: 9rem;
+        width: auto;
+        padding-top: 1rem;
+        padding-bottom: 0.5rem;
+    }
+
+    &-actions {
+        display: flex;
+        flex-direction: row;
+        height: 2rem;
+        justify-content: flex-end;
+        width: auto;
+    }
+
+    &-delete {
+        display: flex;
+        width: 1.2rem;
+        background-image: url(../images/outline-delete_forever-24px.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        margin: 0.2rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &-edit {
+        display: flex;
+        width: 1.2rem;
+        background-image: url(../images/outline-edit-24px.svg);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        margin: 0.2rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &-infos {
+        margin-left: 0.4rem;
+    }
+}
+
+img {
+    display: flex;
+    height: 9rem;
+    width: auto;
+}
+
+div.footer {
+    height: 25%;
+    width: 100%;
+}
+  
