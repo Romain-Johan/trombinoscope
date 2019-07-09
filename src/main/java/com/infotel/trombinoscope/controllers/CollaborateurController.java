@@ -37,8 +37,8 @@ public class CollaborateurController {
         newCollab.setFirstname(firstname);
         newCollab.setLastname(lastname);
         newCollab.setAge(Integer.parseInt(age));
-        newCollab.setJob(job);
-        newCollab.setMission(mission);
+        newCollab.setJob(null);
+        newCollab.setMission(null);
         repository.save(newCollab);
         return ResponseEntity.ok("");
     }

@@ -10,9 +10,4 @@ public class HomeController {
 	public String index() {
 		return "index";
 	}
-	
-	@RequestMapping(value = "/gestion")
-	public String trombinoscope() {
-		return "index";
-	}
 }

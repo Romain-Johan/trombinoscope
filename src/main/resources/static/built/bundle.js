@@ -24995,7 +24995,8 @@ function (_React$Component) {
         name: "type",
         type: "radio",
         value: "type-users",
-        id: "type-users"
+        id: "type-users",
+        defaultChecked: true
       }), React.createElement("label", {
         htmlFor: "type-users"
       }, React.createElement("svg", {

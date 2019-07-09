@@ -118,15 +118,14 @@ class App extends React.Component {
 							</button>
 							<div className="search-option">
 								<div>
-									<input name="type" type="radio" value="type-users" id="type-users" />
+									<input name="type" type="radio" value="type-users" id="type-users" defaultChecked={true}/>
 									<label htmlFor="type-users">
 										<svg className="edit-pen-title">
 										<use xmlnsXlink="http://www.w3.org/1999/xlink" xlinkHref="#user"></use>
 										</svg>
 										<span>Collaborateur</span>
 									</label>
-								</div>
-								
+								</div>								
 								<div>
 									<input name="type" type="radio" value="type-posts" id="type-posts" />
 									<label htmlFor="type-posts">
@@ -190,9 +189,6 @@ class App extends React.Component {
 				</section>
 		)
 	}
-
-
-
 }
 
 ReactDOM.render((

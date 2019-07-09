@@ -2,29 +2,27 @@ package com.infotel.trombinoscope.entity;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
+@Document(collection = "collaborateur")
 public class Collaborateur {
 
     @Id
-    @GeneratedValue
-	private int id;
+	private String id;
 
     private String firstname;
     private String lastname;
     private int age;
     private String picture;
-    private String job;
-    private String mission;
+    private Poste job;
+    private Client mission;
     private String skills;
     private Date joinedDate;
 }
