@@ -1,6 +1,7 @@
 package com.infotel.trombinoscope.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 
@@ -23,6 +24,6 @@ public class Collaborateur {
     private String picture;
     private Poste job;
     private Client mission;
-    private String skills;
+    private List<Competence> skills;
     private Date joinedDate;
 }

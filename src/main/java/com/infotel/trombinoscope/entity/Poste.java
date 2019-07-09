@@ -10,7 +10,7 @@ import lombok.Setter;
 public class Poste {
 
     @Id
-    private int id;
+    private String id;
 
     private String libelle;
 }

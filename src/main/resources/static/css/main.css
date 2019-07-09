@@ -40,6 +40,10 @@ div.content {
     height: 9rem;
     width: auto;
     padding-bottom: 0.5rem; }
+    .collaborateur__card-picture img {
+      display: flex;
+      height: 9rem;
+      width: auto; }
   .collaborateur__card-actions {
     display: flex;
     flex-direction: row;
@@ -70,11 +74,21 @@ div.content {
       opacity: 0.5; }
   .collaborateur__card-infos {
     margin-left: 0.4rem; }
-
-img {
-  display: flex;
-  height: 9rem;
-  width: auto; }
+    .collaborateur__card-infos-firstname {
+      font-weight: bold;
+      line-height: 2rem; }
+    .collaborateur__card-infos-howlong {
+      font-style: italic; }
+    .collaborateur__card-infos-mission {
+      display: flex;
+      padding-top: 1rem;
+      align-items: flex-end;
+      line-height: 1rem; }
+    .collaborateur__card-infos-job {
+      display: flex;
+      padding-top: 1rem;
+      align-items: flex-end;
+      line-height: 1rem; }
 
 div.footer {
   height: 25%;

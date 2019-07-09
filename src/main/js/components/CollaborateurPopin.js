@@ -12,8 +12,12 @@ export default class CollaborateurPopin extends Component {
     submit(event) {
         event.preventDefault();
         const formData = new FormData(event.target);
-        var edit = this.state.collaborateur != null ? true : false;
-        this.props.addNewCollaborateur(formData, edit);
+        if(this.state.collaborateur != null) {
+            formData.append("id", this.state.collaborateur.id)
+            this.props.editCollaborateur(formData);
+        } else {
+            this.props.addCollaborateur(formData);
+        }
     }
 
     render() {
@@ -41,22 +45,22 @@ export default class CollaborateurPopin extends Component {
                                         </div>
                                         <div className="col-3 input-effect">
                                             <input className="effect-16" id="lastname" type="text" name="lastname" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.lastname : ''} placeholder="Nom" />
-                                            <label>Prénom</label>
+                                            <label>Nom</label>
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="age" type="text" name="age" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.age : ''} placeholder="Âge" />
-                                            <label>Prénom</label>
+                                            <input className="effect-16" id="age" type="text" name="age" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.age : ''} placeholder="Année d'embauche" />
+                                            <label>Année d'embauche</label>
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="job" type="text" name="job" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.job : ''} placeholder="Poste" />
-                                            <label>Prénom</label>
+                                            <input className="effect-16" id="job" type="text" name="job" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.job.libelle : ''} placeholder="Poste occupé" />
+                                            <label>Poste occupé</label>
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="mission" type="text" name="mission" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.mission : ''} placeholder="Mission" />
-                                            <label>Prénom</label>
+                                            <input className="effect-16" id="mission" type="text" name="mission" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.mission.libelle : ''} placeholder="Mission actuelle" />
+                                            <label>Mission actuelle</label>
                                             <span className="focus-border"></span>
                                         </div>
                                     </div>

@@ -50,6 +50,12 @@ div.content {
         height: 9rem;
         width: auto;
         padding-bottom: 0.5rem;
+
+        img {
+            display: flex;
+            height: 9rem;
+            width: auto;
+        }
     }
 
     &-actions {
@@ -92,13 +98,27 @@ div.content {
 
     &-infos {
         margin-left: 0.4rem;
-    }
-}
 
-img {
-    display: flex;
-    height: 9rem;
-    width: auto;
+        &-firstname {
+            font-weight: bold;
+            line-height: 2rem;
+        }
+        &-howlong {
+            font-style: italic;
+        }
+        &-mission {
+            display: flex;
+            padding-top: 1rem;
+            align-items: flex-end;
+            line-height: 1rem;
+        }
+        &-job {
+            display: flex;
+            padding-top: 1rem;
+            align-items: flex-end;
+            line-height: 1rem;
+        }
+    }
 }
 
 div.footer {

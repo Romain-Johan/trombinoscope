@@ -24882,12 +24882,12 @@ function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "addNewCollaborateur", function (formData, edit) {
+    _defineProperty(_assertThisInitialized(_this), "addCollaborateur", function (formData) {
       return fetch("/collaborateur/add", {
         headers: {
           'Accept': 'application/json'
         },
-        method: edit ? "PUT" : "POST",
+        method: "POST",
         body: formData
       }).then(function (response) {
         if (response.status === 200) {
@@ -24904,13 +24904,35 @@ function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "addCollaborateur", function () {
+    _defineProperty(_assertThisInitialized(_this), "editCollaborateur", function (formData) {
+      return fetch("/collaborateur/edit", {
+        headers: {
+          'Accept': 'application/json'
+        },
+        method: "PUT",
+        body: formData
+      }).then(function (response) {
+        if (response.status === 200) {
+          _this.setState({
+            mode: 'collaborateur-list'
+          });
+
+          _this.loadFromServer();
+        } else {
+          _this.setState({
+            addCollaborateurError: true
+          });
+        }
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "switchToAddMode", function () {
       _this.setState({
         mode: 'collaborateur-add'
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "editCollaborateur", function (collabToEdit) {
+    _defineProperty(_assertThisInitialized(_this), "switchToEditMode", function (collabToEdit) {
       _this.setState({
         mode: 'collaborateur-edit',
         collaborateur: collabToEdit
@@ -24952,7 +24974,7 @@ function (_React$Component) {
         }, React.createElement("a", {
           className: "collaborateur__card-edit",
           onClick: function onClick() {
-            _this2.editCollaborateur(c);
+            _this2.switchToEditMode(c);
           }
         }), React.createElement("a", {
           className: "collaborateur__card-delete",
@@ -24965,7 +24987,23 @@ function (_React$Component) {
           src: randomImages[Math.floor(Math.random() * randomImages.length)]
         })), React.createElement("div", {
           className: "collaborateur__card-infos"
-        }, React.createElement("p", null, c.firstname, " ", c.lastname), React.createElement("p", null, c.age, " ans"), React.createElement("p", null, c.job), React.createElement("p", null, c.mission)));
+        }, React.createElement("div", {
+          className: "collaborateur__card-infos-firstname"
+        }, c.firstname, " ", c.lastname), React.createElement("div", {
+          className: "collaborateur__card-infos-howlong"
+        }, "Chez nous depuis ", c.age), React.createElement("div", {
+          className: "collaborateur__card-infos-mission"
+        }, React.createElement("img", {
+          src: "../images/mission.png",
+          width: "20px",
+          height: "20px"
+        }), c.mission.libelle), React.createElement("div", {
+          className: "collaborateur__card-infos-job"
+        }, React.createElement("img", {
+          src: "../images/poste.png",
+          width: "20px",
+          height: "20px"
+        }), c.job.libelle)));
       });
       return React.createElement("section", {
         className: "wrapper"
@@ -24975,7 +25013,7 @@ function (_React$Component) {
         type: "button",
         className: "button white",
         onClick: function onClick() {
-          _this2.addCollaborateur();
+          _this2.switchToAddMode();
         }
       }, "+"), React.createElement("form", {
         className: "search-form"
@@ -25073,11 +25111,12 @@ function (_React$Component) {
       })))), React.createElement("div", {
         className: "content"
       }, collaborateurs), this.state.mode === 'collaborateur-add' && React.createElement(_components_CollaborateurPopin__WEBPACK_IMPORTED_MODULE_0__["default"], {
-        addNewCollaborateur: this.addNewCollaborateur,
+        addCollaborateur: this.addCollaborateur,
         onClose: this.onClose,
         addCollaborateurError: this.state.addCollaborateurError
       }), this.state.mode === 'collaborateur-edit' && React.createElement(_components_CollaborateurPopin__WEBPACK_IMPORTED_MODULE_0__["default"], {
-        addNewCollaborateur: this.addNewCollaborateur,
+        addCollaborateur: this.addCollaborateur,
+        editCollaborateur: this.editCollaborateur,
         onClose: this.onClose,
         collabToEdit: this.state.collaborateur
       }));
@@ -25145,8 +25184,13 @@ function (_Component) {
     value: function submit(event) {
       event.preventDefault();
       var formData = new FormData(event.target);
-      var edit = this.state.collaborateur != null ? true : false;
-      this.props.addNewCollaborateur(formData, edit);
+
+      if (this.state.collaborateur != null) {
+        formData.append("id", this.state.collaborateur.id);
+        this.props.editCollaborateur(formData);
+      } else {
+        this.props.addCollaborateur(formData);
+      }
     }
   }, {
     key: "render",
@@ -25205,7 +25249,7 @@ function (_Component) {
         name: "lastname",
         defaultValue: this.state.collaborateur != null ? this.state.collaborateur.lastname : '',
         placeholder: "Nom"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
@@ -25215,8 +25259,8 @@ function (_Component) {
         type: "text",
         name: "age",
         defaultValue: this.state.collaborateur != null ? this.state.collaborateur.age : '',
-        placeholder: "\xC2ge"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        placeholder: "Ann\xE9e d'embauche"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Ann\xE9e d'embauche"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
@@ -25225,9 +25269,9 @@ function (_Component) {
         id: "job",
         type: "text",
         name: "job",
-        defaultValue: this.state.collaborateur != null ? this.state.collaborateur.job : '',
-        placeholder: "Poste"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        defaultValue: this.state.collaborateur != null ? this.state.collaborateur.job.libelle : '',
+        placeholder: "Poste occup\xE9"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Poste occup\xE9"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
@@ -25236,9 +25280,9 @@ function (_Component) {
         id: "mission",
         type: "text",
         name: "mission",
-        defaultValue: this.state.collaborateur != null ? this.state.collaborateur.mission : '',
-        placeholder: "Mission"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        defaultValue: this.state.collaborateur != null ? this.state.collaborateur.mission.libelle : '',
+        placeholder: "Mission actuelle"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Mission actuelle"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "authent__content-footer"

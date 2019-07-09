@@ -48,12 +48,29 @@ class App extends React.Component {
 		});
 	}
 
-	addNewCollaborateur = (formData, edit) => {
+	addCollaborateur = (formData) => {
         return fetch("/collaborateur/add", {
             headers: {
                 'Accept': 'application/json',
             },
-            method: edit ? "PUT" : "POST",
+            method: "POST",
+            body: formData
+        }).then(response => {
+            if (response.status === 200) {
+				this.setState({mode: 'collaborateur-list'})
+				this.loadFromServer();
+            } else {
+                this.setState({addCollaborateurError : true})
+            }
+        });
+	}
+
+	editCollaborateur = (formData) => {
+        return fetch("/collaborateur/edit", {
+            headers: {
+                'Accept': 'application/json',
+            },
+            method: "PUT",
             body: formData
         }).then(response => {
             if (response.status === 200) {
@@ -65,11 +82,11 @@ class App extends React.Component {
         });
 	}
 	
-	addCollaborateur = () => {
+	switchToAddMode = () => {
 		this.setState({mode: 'collaborateur-add'});
 	}
 	
-	editCollaborateur = (collabToEdit) => {
+	switchToEditMode = (collabToEdit) => {
 		this.setState({mode: 'collaborateur-edit', collaborateur: collabToEdit});
 	}
 	
@@ -92,17 +109,17 @@ class App extends React.Component {
 		const collaborateurs = this.state.collaborateurs.map((c, index) => {
 			return <div className="collaborateur__card" key={index}>
 				<div className="collaborateur__card-actions">
-					<a className="collaborateur__card-edit" onClick={() => {this.editCollaborateur(c)}}></a>
+					<a className="collaborateur__card-edit" onClick={() => {this.switchToEditMode(c)}}></a>
 					<a className="collaborateur__card-delete" onClick={() => {this.deleteCollaborateur(c)}}></a>
 				</div>
 				<div className="collaborateur__card-picture">
 					<img src={randomImages[Math.floor(Math.random()*randomImages.length)]}></img>
 				</div>
 				<div className="collaborateur__card-infos">
-					<p>{c.firstname} {c.lastname}</p>
-					<p>{c.age} ans</p>
-					<p>{c.job}</p>
-					<p>{c.mission}</p>
+					<div className="collaborateur__card-infos-firstname">{c.firstname} {c.lastname}</div>
+					<div className="collaborateur__card-infos-howlong">Chez nous depuis {c.age}</div>
+					<div className="collaborateur__card-infos-mission"><img src="../images/mission.png" width="20px" height="20px"/>{c.mission.libelle}</div>
+					<div className="collaborateur__card-infos-job"><img src="../images/poste.png" width="20px" height="20px"/>{c.job.libelle}</div>
 				</div>
 			</div>
 		});
@@ -110,7 +127,7 @@ class App extends React.Component {
 		return (
 				<section className="wrapper">
 					<div className="menu">
-						<button type="button" className="button white" onClick={() => {this.addCollaborateur()}}>+</button>
+						<button type="button" className="button white" onClick={() => {this.switchToAddMode()}}>+</button>
 						<form className="search-form">
 							<input type="search" defaultValue="" placeholder="Rechercher" className="search-input" />
 							<button type="submit" className="search-button">
@@ -178,12 +195,13 @@ class App extends React.Component {
 					</div>
 					{this.state.mode === 'collaborateur-add' &&
 					<CollaborateurPopin 
-						addNewCollaborateur={this.addNewCollaborateur} 
+						addCollaborateur={this.addCollaborateur} 
 						onClose={this.onClose}
 						addCollaborateurError={this.state.addCollaborateurError} /> }
 					{this.state.mode === 'collaborateur-edit' &&
 					<CollaborateurPopin 
-						addNewCollaborateur={this.addNewCollaborateur} 
+						addCollaborateur={this.addCollaborateur} 
+						editCollaborateur={this.editCollaborateur} 
 						onClose={this.onClose} 
 						collabToEdit={this.state.collaborateur} /> }
 				</section>

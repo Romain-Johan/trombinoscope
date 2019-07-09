@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Client {
+public class Competence {
     
     @Id
     private String id;
