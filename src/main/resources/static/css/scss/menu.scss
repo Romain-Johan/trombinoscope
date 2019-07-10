@@ -17,7 +17,7 @@ App
   position: relative;
   top: 80%;
   left: 50%;
-  width: 350px;
+  width: 225px;
   height: 40px;
   border-radius: 40px;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
@@ -37,10 +37,9 @@ App
   font-size: 14px;
   background: none;
   color: #5a6674;
-  width: 195px;
+  width: 175px;
   height: 20px;
   border: none;
-  appearance: none;
   outline: none;
 
   &::-webkit-search-cancel-button {

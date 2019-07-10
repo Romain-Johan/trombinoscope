@@ -39,7 +39,8 @@ div.content {
         transition-duration: 500ms;
         transform: scale(1.05);
         
-        .collaborateur__card-actions {
+        .collaborateur__card-edit, 
+        .collaborateur__card-delete {
             display: flex;
         }
       }
@@ -67,7 +68,7 @@ div.content {
     }
 
     &-delete {
-        display: flex;
+        display: none;
         width: 1.2rem;
         background-image: url(../images/outline-delete_forever-24px.svg);
         background-size: contain;
@@ -82,7 +83,7 @@ div.content {
     }
 
     &-edit {
-        display: flex;
+        display: none;
         width: 1.2rem;
         background-image: url(../images/outline-edit-24px.svg);
         background-size: contain;
@@ -101,7 +102,8 @@ div.content {
 
         &-firstname {
             font-weight: bold;
-            line-height: 2rem;
+            padding-top: 0.5rem;
+            line-height: 1rem;
         }
         &-howlong {
             font-style: italic;

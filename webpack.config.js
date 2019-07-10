@@ -1,5 +1,3 @@
-var path = require('path');
-
 module.exports = {
     entry: './src/main/js/app.js',
     devtool: 'source-map',
@@ -51,6 +49,15 @@ module.exports = {
                         loader: 'sass-loader'
                     }
                 ]
+            },
+            {
+                test: /\.(eot|ttf|woff|woff2)$/,
+                loader: "url-loader",
+                options: {
+                    limit: 100000,
+                    mimetype: "application/font-woff",
+                    name: "./fonts/[name].[ext]"
+                }
             }
         ],
         
