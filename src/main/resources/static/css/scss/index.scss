@@ -99,6 +99,7 @@ div.content {
 
     &-infos {
         margin-left: 0.4rem;
+        font-family: sans-serif;
 
         &-firstname {
             font-weight: bold;
@@ -106,6 +107,7 @@ div.content {
             line-height: 1rem;
         }
         &-howlong {
+            opacity: 0.6;
             font-style: italic;
         }
         &-mission {

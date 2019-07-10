@@ -74,12 +74,14 @@ div.content {
       cursor: pointer;
       opacity: 0.5; }
   .collaborateur__card-infos {
-    margin-left: 0.4rem; }
+    margin-left: 0.4rem;
+    font-family: sans-serif; }
     .collaborateur__card-infos-firstname {
       font-weight: bold;
       padding-top: 0.5rem;
       line-height: 1rem; }
     .collaborateur__card-infos-howlong {
+      opacity: 0.6;
       font-style: italic; }
     .collaborateur__card-infos-mission {
       display: flex;
