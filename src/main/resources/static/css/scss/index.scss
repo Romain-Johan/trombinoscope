@@ -32,8 +32,8 @@ div.content {
     flex-direction: column;
     margin: 0.7rem;
     background-color: $lightgrey;
-    border-radius: 1rem;
-    box-shadow: 5px 5px 5px grey;
+    border-radius: 0rem;
+    box-shadow: 1px 1px 5px grey;
 
     &:hover {
         transition-duration: 500ms;

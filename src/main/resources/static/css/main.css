@@ -27,8 +27,8 @@ div.content {
   flex-direction: column;
   margin: 0.7rem;
   background-color: #f4f3f1;
-  border-radius: 1rem;
-  box-shadow: 5px 5px 5px grey; }
+  border-radius: 0rem;
+  box-shadow: 1px 1px 5px grey; }
   .collaborateur__card:hover {
     transition-duration: 500ms;
     transform: scale(1.05); }
@@ -159,15 +159,9 @@ div.footer {
   .authent__content-error {
     display: flex;
     color: #FD5252;
-    width: 100%;
-    text-align: center;
     font-weight: bold;
-    height: 5rem;
     margin-top: 1rem;
-    background-color: #e8d9b9;
-    justify-content: center;
-    border-radius: 5rem;
-    align-items: center; }
+    justify-content: center; }
   .authent__content-footer {
     display: flex;
     justify-content: center; }
@@ -267,7 +261,7 @@ App
 --------------------*/
 .search-form {
   position: relative;
-  top: 80%;
+  top: 50%;
   left: 50%;
   width: 225px;
   height: 40px;

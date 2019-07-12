@@ -22,11 +22,9 @@ public class Collaborateur {
     private String lastname;
     private int age;
     private String picture;
-    
-    @DBRef
+
     private Poste job;
 
-    @DBRef
     private Client mission;
 
     private List<Competence> skills;

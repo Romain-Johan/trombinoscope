@@ -5,7 +5,9 @@ export default class CollaborateurPopin extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            collaborateur: this.props.collabToEdit
+            collaborateur: this.props.collabToEdit,
+            selectedFile: null,
+            imageUrl: null,
         };
     }
 
@@ -18,6 +20,37 @@ export default class CollaborateurPopin extends Component {
         } else {
             this.props.addCollaborateur(formData);
         }
+    }
+
+    onClickHandler = () => {
+        const data = new FormData();
+        data.append('file', this.state.selectedFile);
+        return fetch("/file/upload", {
+            headers: {
+                'Accept': 'application/json',
+            },
+            method: "POST",
+            body: data
+        }).then(response =>
+			response.json()
+		).then(image => {
+            this.downloadImage(image.name);
+		});
+    }
+
+    downloadImage(name) {
+        console.log(name);
+        fetch("/file/download/"+name, {
+			headers: {
+				'Accept': 'application/json'
+			},
+        }).then(response => {
+            console.log(response.type)
+        })
+    }
+
+    onChangeHandler = (event) => {
+        this.setState({selectedFile: event.target.files[0]})
     }
 
     render() {
@@ -33,7 +66,7 @@ export default class CollaborateurPopin extends Component {
                                 </div>
                                 {this.props.addCollaborateurError && (
                                     <div className="authent__content-error">
-                                        Tous les champs doivent être remplis pour finaliser l'ajout d'un nouveau collaborateur.
+                                        Une erreur est survenue.
                                     </div>
                                 )}
                                 <form method="post" onSubmit={this.submit.bind(this)}>
@@ -63,6 +96,9 @@ export default class CollaborateurPopin extends Component {
                                             <label>Mission actuelle</label>
                                             <span className="focus-border"></span>
                                         </div>
+                                        <input type="file" name="file" onChange={this.onChangeHandler}/>
+                                        <img src={this.state.imageUrl}></img>
+                                        <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
                                     </div>
                                     <div className="authent__content-footer">
                                         <button type="submit" className="button white">Valider</button>

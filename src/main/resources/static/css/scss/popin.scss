@@ -74,15 +74,9 @@
   &-error {
     display: flex;
     color: $reddish;
-    width: 100%;
-    text-align: center;
     font-weight: bold;
-    height: 5rem;
     margin-top: 1rem;
-    background-color: #e8d9b9;
     justify-content: center;
-    border-radius: 5rem;
-    align-items: center;
   }
 
   &-footer {

@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Document(collection = "client")
 public class Client {
     
     @Id

@@ -24868,6 +24868,28 @@ function (_React$Component) {
           collaborateurs: collaborateurs
         });
       });
+      fetch("/client/list", {
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(function (response) {
+        return response.json();
+      }).then(function (clients) {
+        _this.setState({
+          clients: clients
+        });
+      });
+      fetch("/poste/list", {
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(function (response) {
+        return response.json();
+      }).then(function (postes) {
+        _this.setState({
+          postes: postes
+        });
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "deleteCollaborateur", function (collaborateur) {
@@ -24952,7 +24974,10 @@ function (_React$Component) {
     _this.state = {
       mode: 'collaborateur-list',
       collaborateurs: [],
-      collaborateur: ''
+      clients: [],
+      postes: [],
+      collaborateur: '',
+      selectedFile: null
     };
     return _this;
   }
@@ -25049,7 +25074,10 @@ function (_React$Component) {
       }, collaborateurs), this.state.mode === 'collaborateur-add' && React.createElement(_components_CollaborateurPopin__WEBPACK_IMPORTED_MODULE_0__["default"], {
         addCollaborateur: this.addCollaborateur,
         onClose: this.onClose,
-        addCollaborateurError: this.state.addCollaborateurError
+        addCollaborateurError: this.state.addCollaborateurError,
+        clients: this.state.clients,
+        postes: this.state.postes,
+        selectedFile: this.state.selectedFile
       }), this.state.mode === 'collaborateur-edit' && React.createElement(_components_CollaborateurPopin__WEBPACK_IMPORTED_MODULE_0__["default"], {
         addCollaborateur: this.addCollaborateur,
         editCollaborateur: this.editCollaborateur,
@@ -25088,13 +25116,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
@@ -25109,8 +25139,33 @@ function (_Component) {
     _classCallCheck(this, CollaborateurPopin);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CollaborateurPopin).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "onClickHandler", function () {
+      var data = new FormData();
+      data.append('file', _this.state.selectedFile);
+      return fetch("/file/upload", {
+        headers: {
+          'Accept': 'application/json'
+        },
+        method: "POST",
+        body: data
+      }).then(function (response) {
+        return response.json();
+      }).then(function (image) {
+        _this.downloadImage(image.name);
+      });
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "onChangeHandler", function (event) {
+      _this.setState({
+        selectedFile: event.target.files[0]
+      });
+    });
+
     _this.state = {
-      collaborateur: _this.props.collabToEdit
+      collaborateur: _this.props.collabToEdit,
+      selectedFile: null,
+      imageUrl: null
     };
     return _this;
   }
@@ -25127,6 +25182,18 @@ function (_Component) {
       } else {
         this.props.addCollaborateur(formData);
       }
+    }
+  }, {
+    key: "downloadImage",
+    value: function downloadImage(name) {
+      console.log(name);
+      fetch("/file/download/" + name, {
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(function (response) {
+        console.log(response.type);
+      });
     }
   }, {
     key: "render",
@@ -25160,7 +25227,7 @@ function (_Component) {
         className: "authent__content-text"
       }, "Veuillez remplir le formulaire pour ajouter un collaborateur"), this.props.addCollaborateurError && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "authent__content-error"
-      }, "Tous les champs doivent \xEAtre remplis pour finaliser l'ajout d'un nouveau collaborateur."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+      }, "Une erreur est survenue."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         method: "post",
         onSubmit: this.submit.bind(this)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -25220,7 +25287,17 @@ function (_Component) {
         placeholder: "Mission actuelle"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Mission actuelle"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "file",
+        name: "file",
+        onChange: this.onChangeHandler
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: this.state.imageUrl
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "btn btn-success btn-block",
+        onClick: this.onClickHandler
+      }, "Upload")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "authent__content-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",

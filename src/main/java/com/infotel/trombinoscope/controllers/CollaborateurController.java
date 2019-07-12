@@ -24,12 +24,17 @@ public class CollaborateurController {
 	
     @Autowired
     private CollaborateurRepository repository;
-
+    
     @GetMapping(path = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public Iterable<Collaborateur> findAll() {
         return repository.findAll();
     }
     
+    @PostMapping(value = "/add2")
+    public Collaborateur create2(@RequestBody Collaborateur c) {
+        return repository.save(c);
+    }
+
     @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> create(
         @RequestPart String firstname,
@@ -41,10 +46,12 @@ public class CollaborateurController {
         newCollab.setFirstname(firstname);
         newCollab.setLastname(lastname);
         newCollab.setAge(Integer.parseInt(age));
+
         Poste poste = new Poste();
         poste.setLibelle(job);
         Client client = new Client();
         client.setLibelle(mission);
+
         newCollab.setJob(poste);
         newCollab.setMission(client);
         repository.save(newCollab);

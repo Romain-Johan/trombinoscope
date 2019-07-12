@@ -11,7 +11,10 @@ class App extends React.Component {
 		this.state = {
 			mode: 'collaborateur-list',
 			collaborateurs: [],
+			clients: [],
+			postes: [],
 			collaborateur: '',
+			selectedFile: null
 		};
 	}
 	
@@ -29,6 +32,28 @@ class App extends React.Component {
 		).then(collaborateurs => {
 			this.setState({
 				collaborateurs
+			})
+		});
+		fetch("/client/list", {
+			headers: {
+				'Accept': 'application/json'
+			},
+		}).then(response =>
+			response.json()
+		).then(clients => {
+			this.setState({
+				clients
+			})
+		});
+		fetch("/poste/list", {
+			headers: {
+				'Accept': 'application/json'
+			},
+		}).then(response =>
+			response.json()
+		).then(postes => {
+			this.setState({
+				postes
 			})
 		});
 	}
@@ -157,7 +182,10 @@ class App extends React.Component {
 					<CollaborateurPopin 
 						addCollaborateur={this.addCollaborateur} 
 						onClose={this.onClose}
-						addCollaborateurError={this.state.addCollaborateurError} /> }
+						addCollaborateurError={this.state.addCollaborateurError}
+						clients={this.state.clients}
+						postes={this.state.postes} 
+						selectedFile={this.state.selectedFile}/> }
 					{this.state.mode === 'collaborateur-edit' &&
 					<CollaborateurPopin 
 						addCollaborateur={this.addCollaborateur} 
