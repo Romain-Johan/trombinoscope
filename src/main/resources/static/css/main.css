@@ -9,7 +9,8 @@ section.wrapper {
   width: 100%; }
 
 div.menu {
-  display: flex; }
+  display: flex;
+  background-color: #0747a6; }
 
 div.content {
   display: flex;
@@ -18,23 +19,24 @@ div.content {
   width: 100%;
   flex-wrap: wrap;
   justify-content: center;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  background-color: #F4F5F7; }
 
 .collaborateur__card {
   display: flex;
-  height: 20rem;
-  width: 15rem;
+  height: 25rem;
+  width: 20rem;
   flex-direction: column;
-  margin: 0.7rem;
-  background-color: #f4f3f1;
+  margin: 1.7rem;
+  background-color: white;
   border-radius: 0rem;
-  box-shadow: 1px 1px 5px grey; }
-  .collaborateur__card:hover {
+  box-shadow: 1px 1px 2px grey; }
+  .collaborateur__card:hover .collaborateur__card-edit,
+  .collaborateur__card:hover .collaborateur__card-delete {
+    display: flex; }
+  .collaborateur__card:hover .collaborateur__card-picture {
     transition-duration: 500ms;
-    transform: scale(1.05); }
-    .collaborateur__card:hover .collaborateur__card-edit,
-    .collaborateur__card:hover .collaborateur__card-delete {
-      display: flex; }
+    transform: scale(1.1); }
   .collaborateur__card-picture {
     display: flex;
     justify-content: center;
@@ -74,25 +76,44 @@ div.content {
       cursor: pointer;
       opacity: 0.5; }
   .collaborateur__card-infos {
+    display: flex;
+    flex-direction: column;
+    padding-top: 1rem;
+    height: 100%;
+    color: #005091;
     margin-left: 0.4rem;
     font-family: sans-serif; }
     .collaborateur__card-infos-firstname {
       font-weight: bold;
+      font-size: larger;
       padding-top: 0.5rem;
-      line-height: 1rem; }
-    .collaborateur__card-infos-howlong {
-      opacity: 0.6;
-      font-style: italic; }
-    .collaborateur__card-infos-mission {
+      line-height: 1rem;
+      color: #002E55; }
+    .collaborateur__card-infos-howlong, .collaborateur__card-infos-mission, .collaborateur__card-infos-job {
       display: flex;
       padding-top: 1rem;
       align-items: flex-end;
       line-height: 1rem; }
-    .collaborateur__card-infos-job {
+    .collaborateur__card-infos img {
+      height: 20px;
+      width: 20px;
+      margin-right: 0.5rem; }
+    .collaborateur__card-infos-skills {
       display: flex;
-      padding-top: 1rem;
-      align-items: flex-end;
-      line-height: 1rem; }
+      font-size: small;
+      flex-wrap: wrap;
+      padding-top: 0.2rem; }
+      .collaborateur__card-infos-skills-skill {
+        display: flex;
+        border: 1px solid grey;
+        box-shadow: 1px 1px 2px grey;
+        border-radius: 3rem;
+        height: 1rem;
+        margin: 0.2rem;
+        padding: 0.5rem;
+        width: fit-content;
+        justify-content: center;
+        align-items: center; }
 
 div.footer {
   height: 25%;
@@ -235,12 +256,11 @@ input[type="text"] {
 .effect-16 ~ label {
   position: absolute;
   left: 0;
-  width: 100%;
   top: 9px;
   color: #aaa;
   transition: 0.3s;
-  z-index: -1;
-  letter-spacing: 0.5px; }
+  letter-spacing: 0.5px;
+  z-index: -1; }
 
 .effect-16:focus ~ label, .has-content.effect-16 ~ label {
   top: -16px;
@@ -265,7 +285,6 @@ App
   left: 50%;
   width: 225px;
   height: 40px;
-  border-radius: 40px;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
   transform: translate(-50%, -50%);
   background: #fff;

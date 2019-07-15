@@ -50,12 +50,11 @@ input[type="text"]{
 .effect-16 ~ label{
     position: absolute;
     left: 0;
-    width: 100%;
     top: 9px;
     color: #aaa;
     transition: 0.3s;
-    z-index: -1;
     letter-spacing: 0.5px;
+    z-index: -1;
 }
 .effect-16:focus ~ label, .has-content.effect-16 ~ label{
     top: -16px;

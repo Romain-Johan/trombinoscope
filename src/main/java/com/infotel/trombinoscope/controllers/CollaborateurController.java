@@ -30,34 +30,16 @@ public class CollaborateurController {
         return repository.findAll();
     }
     
-    @PostMapping(value = "/add2")
-    public Collaborateur create2(@RequestBody Collaborateur c) {
+    @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Collaborateur create(@RequestBody Collaborateur c) {
+        return repository.save(c);
+    }
+    
+    @PutMapping(value = "/edit2", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Collaborateur edit2(@RequestBody Collaborateur c) {
         return repository.save(c);
     }
 
-    @PostMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> create(
-        @RequestPart String firstname,
-        @RequestPart String lastname,
-        @RequestPart String age,
-        @RequestPart String job,
-        @RequestPart String mission) {
-        Collaborateur newCollab = new Collaborateur();
-        newCollab.setFirstname(firstname);
-        newCollab.setLastname(lastname);
-        newCollab.setAge(Integer.parseInt(age));
-
-        Poste poste = new Poste();
-        poste.setLibelle(job);
-        Client client = new Client();
-        client.setLibelle(mission);
-
-        newCollab.setJob(poste);
-        newCollab.setMission(client);
-        repository.save(newCollab);
-        return ResponseEntity.ok("");
-    }
-    
     @PutMapping(value = "/edit", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> edit(
         @RequestPart String id,

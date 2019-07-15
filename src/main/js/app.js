@@ -74,13 +74,14 @@ class App extends React.Component {
 		});
 	}
 
-	addCollaborateur = (formData) => {
+	addCollaborateur = (collaborateur) => {
         return fetch("/collaborateur/add", {
             headers: {
                 'Accept': 'application/json',
+                'Content-Type' : 'application/json',
             },
             method: "POST",
-            body: formData
+            body: collaborateur
         }).then(response => {
             if (response.status === 200) {
 				this.setState({mode: 'collaborateur-list'})
@@ -143,9 +144,16 @@ class App extends React.Component {
 				</div>
 				<div className="collaborateur__card-infos">
 					<div className="collaborateur__card-infos-firstname">{c.firstname} {c.lastname}</div>
-					<div className="collaborateur__card-infos-howlong">Chez nous depuis {c.age}</div>
-					<div className="collaborateur__card-infos-mission"><img src="../images/mission.png" width="20px" height="20px"/>{c.mission.libelle}</div>
-					<div className="collaborateur__card-infos-job"><img src="../images/poste.png" width="20px" height="20px"/>{c.job.libelle}</div>
+					<div className="collaborateur__card-infos-howlong"><img src="../images/calendrier.png"/>Chez nous depuis {c.age}</div>
+					<div className="collaborateur__card-infos-mission"><img src="../images/mission.png"/>Actuellement en mission chez {c.mission.libelle}</div>
+					<div className="collaborateur__card-infos-job"><img src="../images/poste.png"/>{c.job.libelle}</div>
+					<div className="collaborateur__card-infos-skills">
+						<div className="collaborateur__card-infos-skills-skill">JAVA 8</div>
+						<div className="collaborateur__card-infos-skills-skill">PHP</div>
+						<div className="collaborateur__card-infos-skills-skill">SQL Server</div>
+						<div className="collaborateur__card-infos-skills-skill">React JS</div>
+						<div className="collaborateur__card-infos-skills-skill">HTML 5</div>
+					</div>
 				</div>
 			</div>
 		});
@@ -184,13 +192,14 @@ class App extends React.Component {
 						onClose={this.onClose}
 						addCollaborateurError={this.state.addCollaborateurError}
 						clients={this.state.clients}
-						postes={this.state.postes} 
-						selectedFile={this.state.selectedFile}/> }
+						postes={this.state.postes} /> }
 					{this.state.mode === 'collaborateur-edit' &&
 					<CollaborateurPopin 
 						addCollaborateur={this.addCollaborateur} 
 						editCollaborateur={this.editCollaborateur} 
 						onClose={this.onClose} 
+						clients={this.state.clients}
+						postes={this.state.postes} 
 						collabToEdit={this.state.collaborateur} /> }
 				</section>
 		)

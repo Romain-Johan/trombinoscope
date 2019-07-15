@@ -6,20 +6,33 @@ export default class CollaborateurPopin extends Component {
         super(props);
         this.state = {
             collaborateur: this.props.collabToEdit,
-            selectedFile: null,
+            postes: this.props.postes,
+            clients: this.props.clients,
             imageUrl: null,
         };
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
     submit(event) {
         event.preventDefault();
-        const formData = new FormData(event.target);
-        if(this.state.collaborateur != null) {
-            formData.append("id", this.state.collaborateur.id)
-            this.props.editCollaborateur(formData);
-        } else {
-            this.props.addCollaborateur(formData);
+        var collaborateur = {
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            age: this.state.age,
+            mission: {"libelle": this.state.mission},
+            job: {"libelle": this.state.job},
         }
+        this.props.addCollaborateur(JSON.stringify(collaborateur));
+    }
+
+    handleInputChange(event) {
+        this.setState({
+            [event.target.name]: event.target.value
+        });
+    }
+
+    onImageHandler = (event) => {
+        this.setState({selectedFile: event.target.files[0]})
     }
 
     onClickHandler = () => {
@@ -34,26 +47,19 @@ export default class CollaborateurPopin extends Component {
         }).then(response =>
 			response.json()
 		).then(image => {
-            this.downloadImage(image.name);
+            console.log(image.name);
 		});
     }
 
-    downloadImage(name) {
-        console.log(name);
-        fetch("/file/download/"+name, {
-			headers: {
-				'Accept': 'application/json'
-			},
-        }).then(response => {
-            console.log(response.type)
-        })
-    }
-
-    onChangeHandler = (event) => {
-        this.setState({selectedFile: event.target.files[0]})
-    }
-
     render() {
+
+        const postes = this.state.postes.map((p, index) => {
+            return <option key={index} value={p.libelle}>{p.libelle}</option>
+        });
+        const clients = this.state.clients.map((c, index) => {
+            return <option key={index} value={c.libelle}>{c.libelle}</option>
+        });
+
         return (<div className="popin-container">
                 <div className="popin-background" onClick={() => {this.props.onClose()}}></div>
                     <div className="popin" onClick={e => e.stopPropagation()}>
@@ -72,31 +78,31 @@ export default class CollaborateurPopin extends Component {
                                 <form method="post" onSubmit={this.submit.bind(this)}>
                                     <div className="authent__content-mobile">
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="firstname" type="text" name="firstname" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.firstname : ''} placeholder="Prénom" />
+                                            <input className="effect-16" id="firstname" type="text" name="firstname" value={this.state.value} onChange={this.handleInputChange} />
                                             <label>Prénom</label>
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="lastname" type="text" name="lastname" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.lastname : ''} placeholder="Nom" />
+                                            <input className="effect-16" id="lastname" type="text" name="lastname" value={this.state.value} onChange={this.handleInputChange} />
                                             <label>Nom</label>
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="age" type="text" name="age" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.age : ''} placeholder="Année d'embauche" />
+                                            <input className="effect-16" id="age" type="text" name="age" value={this.state.value} onChange={this.handleInputChange} />
                                             <label>Année d'embauche</label>
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="job" type="text" name="job" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.job.libelle : ''} placeholder="Poste occupé" />
-                                            <label>Poste occupé</label>
-                                            <span className="focus-border"></span>
+                                            <select onChange={this.handleInputChange} value={this.state.value} name="job">
+                                                {postes}
+                                            </select>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="mission" type="text" name="mission" defaultValue={this.state.collaborateur != null ? this.state.collaborateur.mission.libelle : ''} placeholder="Mission actuelle" />
-                                            <label>Mission actuelle</label>
-                                            <span className="focus-border"></span>
+                                            <select onChange={this.handleInputChange} value={this.state.value} name="mission">
+                                                {clients}
+                                            </select>
                                         </div>
-                                        <input type="file" name="file" onChange={this.onChangeHandler}/>
+                                        <input type="file" name="file" onChange={this.onImageHandler}/>
                                         <img src={this.state.imageUrl}></img>
                                         <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
                                     </div>
