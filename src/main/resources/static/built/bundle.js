@@ -24890,6 +24890,17 @@ function (_React$Component) {
           postes: postes
         });
       });
+      fetch("/competence/list", {
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(function (response) {
+        return response.json();
+      }).then(function (skills) {
+        _this.setState({
+          skills: skills
+        });
+      });
     });
 
     _defineProperty(_assertThisInitialized(_this), "deleteCollaborateur", function (collaborateur) {
@@ -24930,13 +24941,13 @@ function (_React$Component) {
       });
     });
 
-    _defineProperty(_assertThisInitialized(_this), "editCollaborateur", function (formData) {
-      return fetch("/collaborateur/edit", {
+    _defineProperty(_assertThisInitialized(_this), "editCollaborateur", function (collaborateur, id) {
+      return fetch("/collaborateur/edit/" + id, {
         headers: {
           'Accept': 'application/json'
         },
         method: "PUT",
-        body: formData
+        body: collaborateur
       }).then(function (response) {
         if (response.status === 200) {
           _this.setState({
@@ -24977,6 +24988,7 @@ function (_React$Component) {
       collaborateurs: [],
       clients: [],
       postes: [],
+      skills: [],
       collaborateur: '',
       selectedFile: null
     };
@@ -25032,17 +25044,12 @@ function (_React$Component) {
           src: "../images/poste.png"
         }), c.job.libelle), React.createElement("div", {
           className: "collaborateur__card-infos-skills"
-        }, React.createElement("div", {
-          className: "collaborateur__card-infos-skills-skill"
-        }, "JAVA 8"), React.createElement("div", {
-          className: "collaborateur__card-infos-skills-skill"
-        }, "PHP"), React.createElement("div", {
-          className: "collaborateur__card-infos-skills-skill"
-        }, "SQL Server"), React.createElement("div", {
-          className: "collaborateur__card-infos-skills-skill"
-        }, "React JS"), React.createElement("div", {
-          className: "collaborateur__card-infos-skills-skill"
-        }, "HTML 5"))));
+        }, c.skills && c.skills.map(function (s, index) {
+          return React.createElement("div", {
+            key: index,
+            className: "collaborateur__card-infos-skills-skill"
+          }, s.libelle);
+        }))));
       });
       Array.from(document.querySelectorAll('.searchable')).forEach(function (searcheable) {
         var searchInputs = Array.from(searcheable.querySelectorAll('.search'));
@@ -25087,13 +25094,15 @@ function (_React$Component) {
         onClose: this.onClose,
         addCollaborateurError: this.state.addCollaborateurError,
         clients: this.state.clients,
-        postes: this.state.postes
+        postes: this.state.postes,
+        skills: this.state.skills
       }), this.state.mode === 'collaborateur-edit' && React.createElement(_components_CollaborateurPopin__WEBPACK_IMPORTED_MODULE_0__["default"], {
         addCollaborateur: this.addCollaborateur,
         editCollaborateur: this.editCollaborateur,
         onClose: this.onClose,
         clients: this.state.clients,
         postes: this.state.postes,
+        skills: this.state.skills,
         collabToEdit: this.state.collaborateur
       }));
     }
@@ -25119,6 +25128,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -25178,9 +25195,11 @@ function (_Component) {
       collaborateur: _this.props.collabToEdit,
       postes: _this.props.postes,
       clients: _this.props.clients,
+      skills: _this.props.skills,
       imageUrl: null
     };
     _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
+    _this.handleMultipleInputChange = _this.handleMultipleInputChange.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -25193,18 +25212,45 @@ function (_Component) {
         lastname: this.state.lastname,
         age: this.state.age,
         mission: {
-          "libelle": this.state.mission
+          "id": this.state.mission
         },
         job: {
-          "libelle": this.state.job
+          "id": this.state.job
         }
       };
-      this.props.addCollaborateur(JSON.stringify(collaborateur));
+
+      if (this.state.collaborateur != null) {
+        this.props.editCollaborateur(JSON.stringify(collaborateur), this.state.collaborateur.id);
+      } else {
+        this.props.addCollaborateur(JSON.stringify(collaborateur));
+      }
     }
   }, {
     key: "handleInputChange",
     value: function handleInputChange(event) {
       this.setState(_defineProperty({}, event.target.name, event.target.value));
+    }
+  }, {
+    key: "handleMultipleInputChange",
+    value: function handleMultipleInputChange(event) {
+      var value = [];
+      var comps = [];
+      value.push(_toConsumableArray(event.target.options).filter(function (option) {
+        return option.selected;
+      }).map(function (option) {
+        return option.value;
+      }));
+
+      for (var i = 0; i < value.length; i++) {
+        var obj = new Object();
+        obj.id = value[i];
+        comps.push(obj);
+      }
+
+      console.log(JSON.stringify(comps));
+      this.setState({
+        competences: value
+      });
     }
   }, {
     key: "render",
@@ -25214,14 +25260,20 @@ function (_Component) {
       var postes = this.state.postes.map(function (p, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
-          value: p.libelle
+          value: p.id
         }, p.libelle);
       });
       var clients = this.state.clients.map(function (c, index) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
           key: index,
-          value: c.libelle
+          value: c.id
         }, c.libelle);
+      });
+      var skills = this.state.skills.map(function (s, index) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", {
+          key: index,
+          value: s.id
+        }, s.libelle);
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "popin-container"
@@ -25262,7 +25314,7 @@ function (_Component) {
         id: "firstname",
         type: "text",
         name: "firstname",
-        value: this.state.value,
+        value: this.state.collaborateur != null ? this.state.collaborateur.firstname : this.state.value,
         onChange: this.handleInputChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
@@ -25273,7 +25325,7 @@ function (_Component) {
         id: "lastname",
         type: "text",
         name: "lastname",
-        value: this.state.value,
+        value: this.state.collaborateur != null ? this.state.collaborateur.lastname : this.state.value,
         onChange: this.handleInputChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
@@ -25284,7 +25336,7 @@ function (_Component) {
         id: "age",
         type: "text",
         name: "age",
-        value: this.state.value,
+        value: this.state.collaborateur != null ? this.state.collaborateur.age : this.state.value,
         onChange: this.handleInputChange
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Ann\xE9e d'embauche"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
@@ -25292,15 +25344,22 @@ function (_Component) {
         className: "col-3 input-effect"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.handleInputChange,
-        value: this.state.value,
+        value: this.state.collaborateur != null ? this.state.collaborateur.job.libelle : this.state.value,
         name: "job"
       }, postes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         onChange: this.handleInputChange,
-        value: this.state.value,
+        value: this.state.collaborateur != null ? this.state.collaborateur.mission.libelle : this.state.value,
         name: "mission"
-      }, clients)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, clients)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-3 input-effect"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
+        multiple: true,
+        onChange: this.handleMultipleInputChange,
+        value: this.state.value,
+        name: "competences"
+      }, skills)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         name: "file",
         onChange: this.onImageHandler

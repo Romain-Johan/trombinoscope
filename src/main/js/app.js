@@ -13,6 +13,7 @@ class App extends React.Component {
 			collaborateurs: [],
 			clients: [],
 			postes: [],
+			skills: [],
 			collaborateur: '',
 			selectedFile: null
 		};
@@ -56,6 +57,17 @@ class App extends React.Component {
 				postes
 			})
 		});
+		fetch("/competence/list", {
+			headers: {
+				'Accept': 'application/json'
+			},
+		}).then(response =>
+			response.json()
+		).then(skills => {
+			this.setState({
+				skills
+			})
+		});
 	}
 	
 	deleteCollaborateur = (collaborateur) => {
@@ -92,13 +104,13 @@ class App extends React.Component {
         });
 	}
 
-	editCollaborateur = (formData) => {
-        return fetch("/collaborateur/edit", {
+	editCollaborateur = (collaborateur, id) => {
+        return fetch("/collaborateur/edit/"+id,{
             headers: {
                 'Accept': 'application/json',
             },
             method: "PUT",
-            body: formData
+            body: collaborateur
         }).then(response => {
             if (response.status === 200) {
 				this.setState({mode: 'collaborateur-list'})
@@ -148,11 +160,9 @@ class App extends React.Component {
 					<div className="collaborateur__card-infos-mission"><img src="../images/mission.png"/>Actuellement en mission chez {c.mission.libelle}</div>
 					<div className="collaborateur__card-infos-job"><img src="../images/poste.png"/>{c.job.libelle}</div>
 					<div className="collaborateur__card-infos-skills">
-						<div className="collaborateur__card-infos-skills-skill">JAVA 8</div>
-						<div className="collaborateur__card-infos-skills-skill">PHP</div>
-						<div className="collaborateur__card-infos-skills-skill">SQL Server</div>
-						<div className="collaborateur__card-infos-skills-skill">React JS</div>
-						<div className="collaborateur__card-infos-skills-skill">HTML 5</div>
+						{c.skills && c.skills.map((s, index) => {
+							return <div key={index} className="collaborateur__card-infos-skills-skill">{s.libelle}</div>
+						})}
 					</div>
 				</div>
 			</div>
@@ -192,7 +202,8 @@ class App extends React.Component {
 						onClose={this.onClose}
 						addCollaborateurError={this.state.addCollaborateurError}
 						clients={this.state.clients}
-						postes={this.state.postes} /> }
+						postes={this.state.postes}
+						skills={this.state.skills} /> }
 					{this.state.mode === 'collaborateur-edit' &&
 					<CollaborateurPopin 
 						addCollaborateur={this.addCollaborateur} 
@@ -200,6 +211,7 @@ class App extends React.Component {
 						onClose={this.onClose} 
 						clients={this.state.clients}
 						postes={this.state.postes} 
+						skills={this.state.skills}
 						collabToEdit={this.state.collaborateur} /> }
 				</section>
 		)

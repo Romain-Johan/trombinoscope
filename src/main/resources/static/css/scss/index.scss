@@ -46,12 +46,7 @@ div.content {
         .collaborateur__card-delete {
             display: flex;
         }
-
-        .collaborateur__card-picture {
-            transition-duration: 500ms;
-            transform: scale(1.1);
-        }
-      }
+    }
 
     &-picture {
         display: flex;

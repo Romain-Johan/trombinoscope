@@ -23,10 +23,13 @@ public class Collaborateur {
     private int age;
     private String picture;
 
+    @DBRef
     private Poste job;
 
+    @DBRef
     private Client mission;
 
+    @DBRef
     private List<Competence> skills;
     private Date joinedDate;
 }
