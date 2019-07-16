@@ -23,6 +23,7 @@ export default class CollaborateurPopin extends Component {
             picture: this.state.picture,
             mission: {"id": this.state.mission},
             job: {"id": this.state.job},
+            skills: this.state.competences
         }
         if(this.state.collaborateur != null) {
             this.props.editCollaborateur(JSON.stringify(collaborateur), this.state.collaborateur.id);
@@ -38,17 +39,15 @@ export default class CollaborateurPopin extends Component {
     }
 
     handleMultipleInputChange(event) {
-        var value = [];
-        var comps = [];
-        value.push([...event.target.options].filter(option => option.selected).map(option => option.value))
+        var value = ([...event.target.options].filter(option => option.selected).map(option => option.value))
+        var elements = [];
         for(var i = 0; i<value.length; i++) {
-            var obj = new Object();
-            obj.id = value[i];
-            comps.push(obj);
+            var element = {};
+            element.id = value[i];
+            elements.push(element);
         }
-        console.log(JSON.stringify(comps));
         this.setState({
-            competences: value
+            competences: elements
         });
     }
 

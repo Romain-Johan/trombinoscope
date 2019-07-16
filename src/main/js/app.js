@@ -108,6 +108,7 @@ class App extends React.Component {
         return fetch("/collaborateur/edit/"+id,{
             headers: {
                 'Accept': 'application/json',
+                'Content-Type' : 'application/json',
             },
             method: "PUT",
             body: collaborateur
@@ -142,7 +143,7 @@ class App extends React.Component {
 					<a className="collaborateur__card-delete" onClick={() => {this.deleteCollaborateur(c)}}></a>
 				</div>
 				<div className="collaborateur__card-picture">
-					<img src={"../images/"+c.picture}></img>
+					<img src={"../images/Avatars/"+c.picture}></img>
 				</div>
 				<div className="collaborateur__card-infos">
 					<div className="collaborateur__card-infos-firstname">{c.firstname} {c.lastname}</div>

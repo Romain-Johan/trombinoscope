@@ -24944,7 +24944,8 @@ function (_React$Component) {
     _defineProperty(_assertThisInitialized(_this), "editCollaborateur", function (collaborateur, id) {
       return fetch("/collaborateur/edit/" + id, {
         headers: {
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         },
         method: "PUT",
         body: collaborateur
@@ -25024,7 +25025,7 @@ function (_React$Component) {
         })), React.createElement("div", {
           className: "collaborateur__card-picture"
         }, React.createElement("img", {
-          src: "../images/" + c.picture
+          src: "../images/Avatars/" + c.picture
         })), React.createElement("div", {
           className: "collaborateur__card-infos"
         }, React.createElement("div", {
@@ -25214,7 +25215,8 @@ function (_Component) {
         },
         job: {
           "id": this.state.job
-        }
+        },
+        skills: this.state.competences
       };
 
       if (this.state.collaborateur != null) {
@@ -25231,23 +25233,22 @@ function (_Component) {
   }, {
     key: "handleMultipleInputChange",
     value: function handleMultipleInputChange(event) {
-      var value = [];
-      var comps = [];
-      value.push(_toConsumableArray(event.target.options).filter(function (option) {
+      var value = _toConsumableArray(event.target.options).filter(function (option) {
         return option.selected;
       }).map(function (option) {
         return option.value;
-      }));
+      });
+
+      var elements = [];
 
       for (var i = 0; i < value.length; i++) {
-        var obj = new Object();
-        obj.id = value[i];
-        comps.push(obj);
+        var element = {};
+        element.id = value[i];
+        elements.push(element);
       }
 
-      console.log(JSON.stringify(comps));
       this.setState({
-        competences: value
+        competences: elements
       });
     }
   }, {
