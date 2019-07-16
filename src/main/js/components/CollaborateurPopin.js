@@ -9,7 +9,6 @@ export default class CollaborateurPopin extends Component {
             postes: this.props.postes,
             clients: this.props.clients,
             skills: this.props.skills,
-            imageUrl: null,
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleMultipleInputChange = this.handleMultipleInputChange.bind(this);
@@ -21,6 +20,7 @@ export default class CollaborateurPopin extends Component {
             firstname: this.state.firstname,
             lastname: this.state.lastname,
             age: this.state.age,
+            picture: this.state.picture,
             mission: {"id": this.state.mission},
             job: {"id": this.state.job},
         }
@@ -53,12 +53,8 @@ export default class CollaborateurPopin extends Component {
     }
 
     onImageHandler = (event) => {
-        this.setState({selectedFile: event.target.files[0]})
-    }
-
-    onClickHandler = () => {
         const data = new FormData();
-        data.append('file', this.state.selectedFile);
+        data.append('file', event.target.files[0]);
         return fetch("/file/upload", {
             headers: {
                 'Accept': 'application/json',
@@ -68,7 +64,9 @@ export default class CollaborateurPopin extends Component {
         }).then(response =>
 			response.json()
 		).then(image => {
-            console.log(image.name);
+            this.setState({
+                picture: image.name
+            });
 		});
     }
 
@@ -133,7 +131,6 @@ export default class CollaborateurPopin extends Component {
                                         </div>
                                         <input type="file" name="file" onChange={this.onImageHandler}/>
                                         <img src={this.state.imageUrl}></img>
-                                        <button type="button" className="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
                                     </div>
                                     <div className="authent__content-footer">
                                         <button type="submit" className="button white">Valider</button>

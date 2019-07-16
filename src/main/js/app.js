@@ -135,16 +135,6 @@ class App extends React.Component {
 
 	render() {
 
-		const randomImages = [
-			"../images/man1.png",
-			"../images/man2.png",
-			"../images/man3.png",
-			"../images/man4.png",
-			"../images/woman1.png",
-			"../images/woman2.png",
-			"../images/woman3.png",
-		];
-
 		const collaborateurs = this.state.collaborateurs.map((c, index) => {
 			return <div className="collaborateur__card searchitem" key={index}>
 				<div className="collaborateur__card-actions">
@@ -152,7 +142,7 @@ class App extends React.Component {
 					<a className="collaborateur__card-delete" onClick={() => {this.deleteCollaborateur(c)}}></a>
 				</div>
 				<div className="collaborateur__card-picture">
-					<img src={randomImages[Math.floor(Math.random()*randomImages.length)]}></img>
+					<img src={"../images/"+c.picture}></img>
 				</div>
 				<div className="collaborateur__card-infos">
 					<div className="collaborateur__card-infos-firstname">{c.firstname} {c.lastname}</div>
@@ -186,6 +176,7 @@ class App extends React.Component {
 				<section className="wrapper searchable">
 					<div className="menu">
 						<button type="button" className="button white" onClick={() => {this.switchToAddMode()}}>+</button>
+						<img className="menu-logo" src="../images/logo.png"></img>
 						<div className="search-form">
 							<input type="search" defaultValue="" placeholder="Rechercher" className="search-input search" />
 							<div className="search-button">

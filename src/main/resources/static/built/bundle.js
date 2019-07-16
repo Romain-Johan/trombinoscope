@@ -25005,7 +25005,6 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var randomImages = ["../images/man1.png", "../images/man2.png", "../images/man3.png", "../images/man4.png", "../images/woman1.png", "../images/woman2.png", "../images/woman3.png"];
       var collaborateurs = this.state.collaborateurs.map(function (c, index) {
         return React.createElement("div", {
           className: "collaborateur__card searchitem",
@@ -25025,7 +25024,7 @@ function (_React$Component) {
         })), React.createElement("div", {
           className: "collaborateur__card-picture"
         }, React.createElement("img", {
-          src: randomImages[Math.floor(Math.random() * randomImages.length)]
+          src: "../images/" + c.picture
         })), React.createElement("div", {
           className: "collaborateur__card-infos"
         }, React.createElement("div", {
@@ -25076,7 +25075,10 @@ function (_React$Component) {
         onClick: function onClick() {
           _this2.switchToAddMode();
         }
-      }, "+"), React.createElement("div", {
+      }, "+"), React.createElement("img", {
+        className: "menu-logo",
+        src: "../images/logo.png"
+      }), React.createElement("div", {
         className: "search-form"
       }, React.createElement("input", {
         type: "search",
@@ -25170,14 +25172,8 @@ function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CollaborateurPopin).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "onImageHandler", function (event) {
-      _this.setState({
-        selectedFile: event.target.files[0]
-      });
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onClickHandler", function () {
       var data = new FormData();
-      data.append('file', _this.state.selectedFile);
+      data.append('file', event.target.files[0]);
       return fetch("/file/upload", {
         headers: {
           'Accept': 'application/json'
@@ -25187,7 +25183,9 @@ function (_Component) {
       }).then(function (response) {
         return response.json();
       }).then(function (image) {
-        console.log(image.name);
+        _this.setState({
+          picture: image.name
+        });
       });
     });
 
@@ -25195,8 +25193,7 @@ function (_Component) {
       collaborateur: _this.props.collabToEdit,
       postes: _this.props.postes,
       clients: _this.props.clients,
-      skills: _this.props.skills,
-      imageUrl: null
+      skills: _this.props.skills
     };
     _this.handleInputChange = _this.handleInputChange.bind(_assertThisInitialized(_this));
     _this.handleMultipleInputChange = _this.handleMultipleInputChange.bind(_assertThisInitialized(_this));
@@ -25211,6 +25208,7 @@ function (_Component) {
         firstname: this.state.firstname,
         lastname: this.state.lastname,
         age: this.state.age,
+        picture: this.state.picture,
         mission: {
           "id": this.state.mission
         },
@@ -25365,11 +25363,7 @@ function (_Component) {
         onChange: this.onImageHandler
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
         src: this.state.imageUrl
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button",
-        className: "btn btn-success btn-block",
-        onClick: this.onClickHandler
-      }, "Upload")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "authent__content-footer"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "submit",

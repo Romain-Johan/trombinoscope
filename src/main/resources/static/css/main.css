@@ -389,6 +389,9 @@ App
       .search-option div input:checked + label span::after {
         border-top-color: #e24040; }
 
+.menu-logo {
+  width: 12rem; }
+
 @font-face {
   font-family: 'Titillium Web Light';
   font-style: normal;
