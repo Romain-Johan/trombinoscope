@@ -24990,8 +24990,7 @@ function (_React$Component) {
       clients: [],
       postes: [],
       skills: [],
-      collaborateur: '',
-      selectedFile: null
+      collaborateur: ''
     };
     return _this;
   }
@@ -25070,13 +25069,7 @@ function (_React$Component) {
         className: "wrapper searchable"
       }, React.createElement("div", {
         className: "menu"
-      }, React.createElement("button", {
-        type: "button",
-        className: "button white",
-        onClick: function onClick() {
-          _this2.switchToAddMode();
-        }
-      }, "+"), React.createElement("img", {
+      }, React.createElement("img", {
         className: "menu-logo",
         src: "../images/logo.png"
       }), React.createElement("div", {
@@ -25092,7 +25085,13 @@ function (_React$Component) {
         src: "../images/search.png"
       })))), React.createElement("div", {
         className: "content"
-      }, collaborateurs), this.state.mode === 'collaborateur-add' && React.createElement(_components_CollaborateurPopin__WEBPACK_IMPORTED_MODULE_0__["default"], {
+      }, collaborateurs, React.createElement("button", {
+        type: "button",
+        className: "button white add",
+        onClick: function onClick() {
+          _this2.switchToAddMode();
+        }
+      }, "+")), this.state.mode === 'collaborateur-add' && React.createElement(_components_CollaborateurPopin__WEBPACK_IMPORTED_MODULE_0__["default"], {
         addCollaborateur: this.addCollaborateur,
         onClose: this.onClose,
         addCollaborateurError: this.state.addCollaborateurError,

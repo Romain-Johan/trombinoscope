@@ -282,7 +282,7 @@ App
 .search-form {
   position: relative;
   top: 50%;
-  left: 47%;
+  left: 35%;
   width: 225px;
   height: 40px;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
@@ -391,6 +391,12 @@ App
 
 .menu-logo {
   width: 12rem; }
+
+button.add {
+  display: flex;
+  position: absolute;
+  left: 0rem;
+  top: 55rem; }
 
 @font-face {
   font-family: 'Titillium Web Light';

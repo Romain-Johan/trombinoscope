@@ -15,7 +15,6 @@ class App extends React.Component {
 			postes: [],
 			skills: [],
 			collaborateur: '',
-			selectedFile: null
 		};
 	}
 	
@@ -176,7 +175,6 @@ class App extends React.Component {
 		return (
 				<section className="wrapper searchable">
 					<div className="menu">
-						<button type="button" className="button white" onClick={() => {this.switchToAddMode()}}>+</button>
 						<img className="menu-logo" src="../images/logo.png"></img>
 						<div className="search-form">
 							<input type="search" defaultValue="" placeholder="Rechercher" className="search-input search" />
@@ -187,6 +185,7 @@ class App extends React.Component {
 					</div>
 					<div className="content">
 						{collaborateurs}
+						<button type="button" className="button white add" onClick={() => {this.switchToAddMode()}}>+</button>
 					</div>
 					{this.state.mode === 'collaborateur-add' &&
 					<CollaborateurPopin 
