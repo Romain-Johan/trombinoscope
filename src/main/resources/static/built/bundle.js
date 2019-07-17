@@ -24904,18 +24904,20 @@ function (_React$Component) {
     });
 
     _defineProperty(_assertThisInitialized(_this), "deleteCollaborateur", function (collaborateur) {
-      return fetch("/collaborateur/delete", {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: "POST",
-        body: JSON.stringify(collaborateur)
-      }).then(function (response) {
-        if (response.status === 200) {
-          _this.loadFromServer();
-        } else {}
-      });
+      if (confirm('Voulez-vous vraiment supprimer ' + collaborateur.firstname + ' ' + collaborateur.lastname + ' ?')) {
+        return fetch("/collaborateur/delete", {
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: "POST",
+          body: JSON.stringify(collaborateur)
+        }).then(function (response) {
+          if (response.status === 200) {
+            _this.loadFromServer();
+          } else {}
+        });
+      }
     });
 
     _defineProperty(_assertThisInitialized(_this), "addCollaborateur", function (collaborateur) {
@@ -25296,9 +25298,7 @@ function (_Component) {
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "authent__content-title"
-      }, this.state.collaborateur != null ? "Modifier un collaborateur" : "Ajouter un collaborateur"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "authent__content-text"
-      }, "Veuillez remplir le formulaire pour ajouter un collaborateur"), this.props.addCollaborateurError && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.collaborateur != null ? "Modifier un collaborateur" : "Ajouter un collaborateur"), this.props.addCollaborateurError && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "authent__content-error"
       }, "Une erreur est survenue."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         method: "post",
@@ -25312,9 +25312,10 @@ function (_Component) {
         id: "firstname",
         type: "text",
         name: "firstname",
-        value: this.state.collaborateur != null ? this.state.collaborateur.firstname : this.state.value,
+        value: this.state.value,
         onChange: this.handleInputChange,
-        placeholder: "Pr\xE9nom"
+        placeholder: "Pr\xE9nom",
+        required: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -25324,9 +25325,10 @@ function (_Component) {
         id: "lastname",
         type: "text",
         name: "lastname",
-        value: this.state.collaborateur != null ? this.state.collaborateur.lastname : this.state.value,
+        value: this.state.value,
         onChange: this.handleInputChange,
-        placeholder: "Nom"
+        placeholder: "Nom",
+        required: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -25336,24 +25338,25 @@ function (_Component) {
         id: "age",
         type: "text",
         name: "age",
-        value: this.state.collaborateur != null ? this.state.collaborateur.age : this.state.value,
+        value: this.state.value,
         onChange: this.handleInputChange,
-        placeholder: "Ann\xE9e d'embauche"
+        placeholder: "Ann\xE9e d'embauche",
+        required: true
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         name: "job",
-        value: this.state.collaborateur != null ? this.state.collaborateur.job.libelle : this.state.value,
+        value: this.state.value,
         onChange: this.handleInputChange
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null), postes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, postes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         name: "mission",
-        value: this.state.collaborateur != null ? this.state.collaborateur.mission.libelle : this.state.value,
+        value: this.state.value,
         onChange: this.handleInputChange
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null), clients)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, clients)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         multiple: true,

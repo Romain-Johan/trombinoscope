@@ -70,19 +70,21 @@ class App extends React.Component {
 	}
 	
 	deleteCollaborateur = (collaborateur) => {
-		return fetch("/collaborateur/delete", {
-			headers: {
-				'Accept': 'application/json',
-		        'Content-Type': 'application/json'
-			},
-			method: "POST",
-			body: JSON.stringify(collaborateur)
-		}).then(response => {
-			if(response.status === 200) {
-				this.loadFromServer();
-			} else {
-			}
-		});
+		if (confirm('Voulez-vous vraiment supprimer ' + collaborateur.firstname + ' ' + collaborateur.lastname + ' ?')) {
+			return fetch("/collaborateur/delete", {
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json'
+				},
+				method: "POST",
+				body: JSON.stringify(collaborateur)
+			}).then(response => {
+				if(response.status === 200) {
+					this.loadFromServer();
+				} else {
+				}
+			});
+		}
 	}
 
 	addCollaborateur = (collaborateur) => {

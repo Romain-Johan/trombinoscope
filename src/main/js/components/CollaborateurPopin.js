@@ -88,9 +88,6 @@ export default class CollaborateurPopin extends Component {
                             <div className="authent__content">
                                 <div className="modal__header-close-button" onClick={() => {this.props.onClose()}}/>
                                 <div className="authent__content-title">{this.state.collaborateur != null ? "Modifier un collaborateur" : "Ajouter un collaborateur"}</div>
-                                <div className="authent__content-text">
-                                    Veuillez remplir le formulaire pour ajouter un collaborateur 
-                                </div>
                                 {this.props.addCollaborateurError && (
                                     <div className="authent__content-error">
                                         Une erreur est survenue.
@@ -100,38 +97,36 @@ export default class CollaborateurPopin extends Component {
                                     <div className="authent__content-mobile">
                                         <div className="col-3 input-effect">
                                             <input className="effect-16" id="firstname" type="text" name="firstname" 
-                                            value={this.state.collaborateur != null ? this.state.collaborateur.firstname : this.state.value} 
+                                            value={this.state.value} 
                                             onChange={this.handleInputChange}
-                                            placeholder="Prénom" />
+                                            placeholder="Prénom" required/>
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
                                             <input className="effect-16" id="lastname" type="text" name="lastname" 
-                                            value={this.state.collaborateur != null ? this.state.collaborateur.lastname : this.state.value} 
+                                            value={this.state.value} 
                                             onChange={this.handleInputChange} 
-                                            placeholder="Nom"/>
+                                            placeholder="Nom" required/>
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
                                             <input className="effect-16" id="age" type="text" name="age" 
-                                            value={this.state.collaborateur != null ? this.state.collaborateur.age : this.state.value} 
+                                            value={this.state.value} 
                                             onChange={this.handleInputChange}
-                                            placeholder="Année d'embauche" />
+                                            placeholder="Année d'embauche" required />
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
                                             <select name="job"
-                                            value={this.state.collaborateur != null ? this.state.collaborateur.job.libelle : this.state.value}
+                                            value={this.state.value}
                                             onChange={this.handleInputChange} >
-                                                <option></option>
                                                 {postes}
                                             </select>
                                         </div>
                                         <div className="col-3 input-effect">
                                             <select name="mission"
-                                            value={this.state.collaborateur != null ? this.state.collaborateur.mission.libelle : this.state.value}
+                                            value={this.state.value}
                                             onChange={this.handleInputChange} >
-                                                <option></option>
                                                 {clients}
                                             </select>
                                         </div>
