@@ -99,32 +99,46 @@ export default class CollaborateurPopin extends Component {
                                 <form method="post" onSubmit={this.submit.bind(this)}>
                                     <div className="authent__content-mobile">
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="firstname" type="text" name="firstname" value={this.state.collaborateur != null ? this.state.collaborateur.firstname : this.state.value} onChange={this.handleInputChange} />
-                                            <label>Prénom</label>
+                                            <input className="effect-16" id="firstname" type="text" name="firstname" 
+                                            value={this.state.collaborateur != null ? this.state.collaborateur.firstname : this.state.value} 
+                                            onChange={this.handleInputChange}
+                                            placeholder="Prénom" />
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="lastname" type="text" name="lastname" value={this.state.collaborateur != null ? this.state.collaborateur.lastname : this.state.value} onChange={this.handleInputChange} />
-                                            <label>Nom</label>
+                                            <input className="effect-16" id="lastname" type="text" name="lastname" 
+                                            value={this.state.collaborateur != null ? this.state.collaborateur.lastname : this.state.value} 
+                                            onChange={this.handleInputChange} 
+                                            placeholder="Nom"/>
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <input className="effect-16" id="age" type="text" name="age" value={this.state.collaborateur != null ? this.state.collaborateur.age : this.state.value} onChange={this.handleInputChange} />
-                                            <label>Année d'embauche</label>
+                                            <input className="effect-16" id="age" type="text" name="age" 
+                                            value={this.state.collaborateur != null ? this.state.collaborateur.age : this.state.value} 
+                                            onChange={this.handleInputChange}
+                                            placeholder="Année d'embauche" />
                                             <span className="focus-border"></span>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <select onChange={this.handleInputChange} value={this.state.collaborateur != null ? this.state.collaborateur.job.libelle : this.state.value} name="job">
+                                            <select name="job"
+                                            value={this.state.collaborateur != null ? this.state.collaborateur.job.libelle : this.state.value}
+                                            onChange={this.handleInputChange} >
+                                                <option></option>
                                                 {postes}
                                             </select>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <select onChange={this.handleInputChange} value={this.state.collaborateur != null ? this.state.collaborateur.mission.libelle : this.state.value} name="mission">
+                                            <select name="mission"
+                                            value={this.state.collaborateur != null ? this.state.collaborateur.mission.libelle : this.state.value}
+                                            onChange={this.handleInputChange} >
+                                                <option></option>
                                                 {clients}
                                             </select>
                                         </div>
                                         <div className="col-3 input-effect">
-                                            <select multiple={true} onChange={this.handleMultipleInputChange} value={this.state.value} name="competences">
+                                            <select multiple={true} name="competences"
+                                            value={this.state.value}
+                                            onChange={this.handleMultipleInputChange} >
                                                 {skills}
                                             </select>
                                         </div>

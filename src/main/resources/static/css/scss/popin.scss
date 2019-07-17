@@ -16,7 +16,7 @@
 
 .popin {
   position: relative;
-  border-radius: 2rem;
+  //border-radius: 2rem;
   overflow: hidden;
   height: auto;
   width: auto;
@@ -27,6 +27,7 @@
     overflow: hidden;
     height: auto;
     overflow-x: hidden;
+    width: 35rem;
   }
 
   &-background {
@@ -50,13 +51,13 @@
   margin: 1rem;
 
   &-title {
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: bold;
-    line-height: 5rem;
+    line-height: 2rem;
     text-align: center;
-    letter-spacing: 0.2rem;
     position: relative;
     margin: 2rem;
+    color: #002E55;
   }
 
   &-text {

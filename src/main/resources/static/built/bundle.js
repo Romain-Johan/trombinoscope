@@ -25313,8 +25313,9 @@ function (_Component) {
         type: "text",
         name: "firstname",
         value: this.state.collaborateur != null ? this.state.collaborateur.firstname : this.state.value,
-        onChange: this.handleInputChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Pr\xE9nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onChange: this.handleInputChange,
+        placeholder: "Pr\xE9nom"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
@@ -25324,8 +25325,9 @@ function (_Component) {
         type: "text",
         name: "lastname",
         value: this.state.collaborateur != null ? this.state.collaborateur.lastname : this.state.value,
-        onChange: this.handleInputChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Nom"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onChange: this.handleInputChange,
+        placeholder: "Nom"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
@@ -25335,28 +25337,29 @@ function (_Component) {
         type: "text",
         name: "age",
         value: this.state.collaborateur != null ? this.state.collaborateur.age : this.state.value,
-        onChange: this.handleInputChange
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Ann\xE9e d'embauche"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        onChange: this.handleInputChange,
+        placeholder: "Ann\xE9e d'embauche"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         className: "focus-border"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        onChange: this.handleInputChange,
+        name: "job",
         value: this.state.collaborateur != null ? this.state.collaborateur.job.libelle : this.state.value,
-        name: "job"
-      }, postes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onChange: this.handleInputChange
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null), postes)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
-        onChange: this.handleInputChange,
+        name: "mission",
         value: this.state.collaborateur != null ? this.state.collaborateur.mission.libelle : this.state.value,
-        name: "mission"
-      }, clients)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        onChange: this.handleInputChange
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("option", null), clients)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-3 input-effect"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("select", {
         multiple: true,
-        onChange: this.handleMultipleInputChange,
+        name: "competences",
         value: this.state.value,
-        name: "competences"
+        onChange: this.handleMultipleInputChange
       }, skills)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "file",
         name: "file",

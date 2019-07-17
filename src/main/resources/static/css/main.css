@@ -131,7 +131,6 @@ div.footer {
 
 .popin {
   position: relative;
-  border-radius: 2rem;
   overflow: hidden;
   height: auto;
   width: auto;
@@ -140,7 +139,8 @@ div.footer {
     background-color: white;
     overflow: hidden;
     height: auto;
-    overflow-x: hidden; }
+    overflow-x: hidden;
+    width: 35rem; }
   .popin-background {
     position: absolute;
     left: 0;
@@ -159,13 +159,13 @@ div.footer {
   overflow: hidden;
   margin: 1rem; }
   .authent__content-title {
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: bold;
-    line-height: 5rem;
+    line-height: 2rem;
     text-align: center;
-    letter-spacing: 0.2rem;
     position: relative;
-    margin: 2rem; }
+    margin: 2rem;
+    color: #002E55; }
   .authent__content-text {
     position: relative;
     text-align: center; }
@@ -212,7 +212,8 @@ input[type="text"] {
   color: #333;
   width: 100%;
   box-sizing: border-box;
-  letter-spacing: 1px; }
+  letter-spacing: 1px;
+  margin: 0.3rem; }
 
 :focus {
   outline: none; }
@@ -256,8 +257,7 @@ input[type="text"] {
   top: 9px;
   color: #aaa;
   transition: 0.3s;
-  letter-spacing: 0.5px;
-  z-index: -1; }
+  letter-spacing: 0.5px; }
 
 .effect-16:focus ~ label, .has-content.effect-16 ~ label {
   top: -16px;
@@ -463,7 +463,6 @@ button.add {
   cursor: pointer;
   text-decoration: none;
   text-transform: none;
-  border-radius: 9rem;
   border: 0;
   padding: 1.3rem;
   position: relative;

@@ -5,6 +5,7 @@ input[type="text"]{
     width: 100%;
     box-sizing: border-box;
     letter-spacing: 1px;
+    margin: 0.3rem;
 }
 
 :focus{
@@ -54,7 +55,7 @@ input[type="text"]{
     color: #aaa;
     transition: 0.3s;
     letter-spacing: 0.5px;
-    z-index: -1;
+    //z-index: -1;
 }
 .effect-16:focus ~ label, .has-content.effect-16 ~ label{
     top: -16px;
