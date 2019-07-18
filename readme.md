@@ -7,7 +7,7 @@
   - Installer les composants de développement JAVA *(Nécessaire pour lancer l'application)*
 - Installer **MongoDB** : https://www.mongodb.com/download-center/community
   - Si vous souhaitez visualiser les données dans la base, il vous faudra MongoDB Compass Community. L'installateur précédent peut l'installer automatiquement, vérifiez que la case est cochée lors de l'installation de MongoDB.
-- Installer l'extension Chrome **"Advanced Rest Client"** pour appeler vos services REST directement
+- Installer l'extension Chrome **"Advanced Rest Client"** pour appeler vos services REST directement : https://chrome.google.com/webstore/detail/advanced-rest-client/hgmloofddffdnphfgcellkdfbfbjeloo?hl=fr
 
 ### Préparation de l'environnement de développement
 
