@@ -35,5 +35,6 @@ Se placer dans le dossier où vous souhaitez travailler et ouvrir la console Git
   
 ### Charger les données dans la base
 
-  - L'application possède un dossier SQL qui contient un script d'initialisation. Ce script charge la base avec des données statiques *(Postes, clients, compétences ...)*
+  - ~~L'application possède un dossier SQL qui contient un script d'initialisation. Ce script charge la base avec des données statiques *(Postes, clients, compétences ...)*~~
+  - Appeler les routes via un client Rest (Advanced Rest Client par exemple) Exemple : ```/postes/add``` avec un body JSON contenant par exemple : ```{ "libelle" : "Ingénieur d'études" }```
   
